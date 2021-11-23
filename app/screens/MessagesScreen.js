@@ -54,7 +54,7 @@ export default function MessagesScreen() {
         ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
-          setRefreshing(initialMessags);
+          setMessages(initialMessags);
         }}
       />
     </Screen>

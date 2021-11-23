@@ -9,6 +9,7 @@ export default function ListItem({
   title,
   subTitle,
   image,
+  IconComponent,
   onPress,
   renderRightActions,
 }) {
@@ -16,10 +17,12 @@ export default function ListItem({
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
         <View style={styles.container}>
-          <Image style={styles.image} source={image} />
+          {IconComponent}
+          {image && <Image style={styles.image} source={image} />}
+
           <View style={styles.textContainer}>
             <AppText style={styles.title}>{title}</AppText>
-            <AppText style={styles.subTitle}>{subTitle}</AppText>
+            {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
           </View>
         </View>
       </TouchableHighlight>
@@ -31,15 +34,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     padding: 15,
+    alignItems: "center",
+    backgroundColor: colors.white,
   },
   image: {
     borderRadius: 35,
     height: 70,
     width: 70,
-    marginRight: 10,
   },
   textContainer: {
-    paddingTop: 10,
+    marginLeft: 10,
+    justifyContent: "center",
   },
   title: {
     fontWeight: "500",
