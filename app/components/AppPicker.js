@@ -5,6 +5,7 @@ import {
   Button,
   TextInput,
   Platform,
+  FlatList,
   TouchableWithoutFeedback,
   Modal,
 } from "react-native";
@@ -13,13 +14,23 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Screen from "./Screen";
 import AppText from "./AppText";
 import defaultStyles from "../config/styles";
+import PickerItem from "./PickerItem";
 
-export default function AppPicker({ icon, placeholder, ...otherProps }) {
+export default function AppPicker({
+  icon,
+  items,
+  numberOfColumns = 1,
+  placeholder,
+  PickerItemComponent = PickerItem,
+  onSelectItem,
+  selectedItem,
+  width,
+}) {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setShowModal(!showModal)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width: width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -28,7 +39,11 @@ export default function AppPicker({ icon, placeholder, ...otherProps }) {
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>{placeholder}</AppText>
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -39,6 +54,21 @@ export default function AppPicker({ icon, placeholder, ...otherProps }) {
       <Modal visible={showModal} animationType="slide">
         <Screen>
           <Button title="Close" onPress={() => setShowModal(!showModal)} />
+          <FlatList
+            data={items}
+            numColumns={3}
+            keyExtractor={(categoryItems) => categoryItems.value.toString()}
+            renderItem={({ item }) => (
+              <PickerItemComponent
+                item={item}
+                label={item.label}
+                onPress={() => {
+                  setShowModal(false);
+                  onSelectItem(item);
+                }}
+              />
+            )}
+          />
         </Screen>
       </Modal>
     </>
@@ -50,7 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },
@@ -59,5 +88,9 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+  },
+  placeholder: {
+    flex: 1,
+    color: defaultStyles.colors.medium,
   },
 });

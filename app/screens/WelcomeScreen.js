@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View, Text } from "react-native";
-import AppButton from "../componets/AppButton";
+import AppButton from "../components/AppButton";
 
 function WelcomeScreen() {
   return (
@@ -24,7 +24,7 @@ function WelcomeScreen() {
         <AppButton
           title="register"
           color="secondary"
-          onPress={() => console.log("login")}
+          onPress={() => console.log("register")}
         />
       </View>
     </ImageBackground>

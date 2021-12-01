@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
-import Screen from "../componets/Screen";
-import ListItem from "../componets/ListItem";
-import AppIcon from "../componets/AppIcon";
-import ListItemSeparator from "../componets/ListItemSeparator";
+import Screen from "../components/Screen";
+import ListItem from "../components/lists/ListItem";
+import AppIcon from "../components/AppIcon";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
 
 import colors from "../config/colors";
 
@@ -30,6 +30,7 @@ export default function AccountScreen() {
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
+          onPress={() => console.log("account details")}
           title="Rick"
           subTitle="rick-s@hotmail.com"
           image={require("../assets/speak-easy-logo.png")}
@@ -42,6 +43,7 @@ export default function AccountScreen() {
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
+              onPress={() => console.log(item.title)}
               IconComponent={
                 <AppIcon
                   name={item.icon.name}
@@ -53,23 +55,21 @@ export default function AccountScreen() {
           ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
-      
-        <ListItem 
+
+      <ListItem
         title="log Out"
+        onPress={() => console.log("log out")}
         IconComponent={
-        <AppIcon 
-        name="logout"
-        backgroundColor={colors.logout}
-        />}
-        />
-      
+          <AppIcon name="logout" backgroundColor={colors.logout} />
+        }
+      />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: colors.light
+    backgroundColor: colors.light,
   },
   container: {
     marginVertical: 20,

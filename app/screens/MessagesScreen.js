@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
-import Screen from "../componets/Screen";
-import ListItem from "../componets/ListItem";
-import ListItemSeparator from "../componets/ListItemSeparator";
-import ListItemDeleteAction from "../componets/ListItemDeleteAction";
+import Screen from "../components/Screen";
+import ListItem from "../components/lists/ListItem";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 
 const initialMessags = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
+    title: "Rick",
+    description: "Get back to work",
     image: require("../assets/speak-easy-logo.png"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
+    title: "Amber",
+    description: "I don't want to",
     image: require("../assets/speak-easy-logo.png"),
   },
   {
     id: 3,
-    title: "T3",
-    description: "D3",
+    title: "Rick",
+    description: "Too bad",
     image: require("../assets/speak-easy-logo.png"),
   },
 ];
@@ -43,7 +43,7 @@ export default function MessagesScreen() {
         renderItem={({ item }) => (
           <ListItem
             title={item.title}
-            subtitle={item.description}
+            subTitle={item.description}
             image={item.image}
             onPress={() => console.log("message selected", item)}
             renderRightActions={() => (
