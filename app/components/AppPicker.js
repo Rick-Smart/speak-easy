@@ -3,8 +3,6 @@ import {
   View,
   StyleSheet,
   Button,
-  TextInput,
-  Platform,
   FlatList,
   TouchableWithoutFeedback,
   Modal,
@@ -19,7 +17,6 @@ import PickerItem from "./PickerItem";
 export default function AppPicker({
   icon,
   items,
-  numberOfColumns = 1,
   placeholder,
   PickerItemComponent = PickerItem,
   onSelectItem,
