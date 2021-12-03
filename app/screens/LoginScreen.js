@@ -10,7 +10,12 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(8).label("Password"),
 });
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
+  const onLogin = (values) => {
+    console.log(values);
+    navigation.navigate("UserScreen");
+  };
+
   return (
     <Screen style={styles.container}>
       <Image
@@ -20,7 +25,7 @@ export default function LoginScreen() {
 
       <AppForm
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => onLogin(values)}
         validationSchema={validationSchema}
       >
         <AppFormField
